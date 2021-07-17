@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const Navbar = ({ toggle }) => {
   return (
-    <nav className='flex justify-between items-center h-16 bg-black  text-white relative shadow-sm font-mono border-transparent text-xl' role='navigation'>
+    <nav className='flex justify-between items-center h-16 bg-black  text-white relative shadow-sm font-mono border-transparent text-lg' role='navigation'>
       <Link to="/" className='pl-8'>
         RTXLand
       </Link>
@@ -18,7 +18,7 @@ const Navbar = ({ toggle }) => {
           <path 
             strokeLinecap="round" 
             strokeLinejoin="round"
-            strokeWidth={2} 
+            strokeWidth={2}
             d="M4 6h16M4 12h16M4 18h16" />
         </svg>
       </div>

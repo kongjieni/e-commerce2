@@ -48,7 +48,7 @@ function App() {
       <Switch>
         { isOpen ? <Route exact path='/content'><Content products={products} setSelectedProduct={setSelectedProduct}/></Route> : null}
         <Route exact path='/product/:id'><ProductPage product={selectedProduct}/></Route>
-        <Route exact path='/' component={Body}></Route>
+        { isOpen ? <Route exact path='/' component={Body}></Route> : null }
       </Switch>
     </>
   );
