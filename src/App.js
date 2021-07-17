@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import Body from './components/Body';
 import Content from './components/Content';
 import ProductPage from './pages/ProductPage';
+import Dropdown from './components/Dropdown';
 
 function App() {
   
@@ -18,17 +19,25 @@ function App() {
       .then(apiProducts => setProducts(apiProducts))
   }
 
-  const [isOpen, setIsOpen] = useState(false);
+  useEffect(getProducts, [])
+
+  const [isOpen, setIsOpen] = useState(false)
+
+  const [visible, setVisible] = useState(false)
+
+  const toggleVisible = () => {
+    setVisible(!visible)
+  }
 
   const toggle = () => {
-    setIsOpen(!isOpen);
+    setIsOpen(!isOpen)
   };
 
   useEffect(() => {
     const hideMenu = () => {
       if (window.innerWidth > 768 && isOpen) {
         setIsOpen(false);
-        console.log('i resized');
+        console.log('i resized')
       }
     };
 
@@ -39,16 +48,17 @@ function App() {
     };
   });
 
-  useEffect(getProducts, [])
+
 
   return (
     <>
       <Navbar toggle={toggle} />
-      { isOpen ? null : <Body toggle={toggle}/>}
+      <Dropdown isOpen={isOpen} toggle={toggle}/>
+      { visible ? null : <Body toggleVisible={toggleVisible}/>}
       <Switch>
-        { isOpen ? <Route exact path='/content'><Content products={products} setSelectedProduct={setSelectedProduct}/></Route> : null}
+        { visible ? <Route exact path='/content'><Content products={products} setSelectedProduct={setSelectedProduct}/></Route> : null}
         <Route exact path='/product/:id'><ProductPage product={selectedProduct}/></Route>
-        { isOpen ? <Route exact path='/' component={Body}></Route> : null }
+        { visible ? <Route exact path='/' component={Body}></Route> : null }
       </Switch>
     </>
   );
